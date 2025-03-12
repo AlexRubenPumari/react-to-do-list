@@ -1,6 +1,18 @@
 :root {
-  --color-primary:#181818;
-  --color-secondary:#f0f0f0;
+  --rounded-sm: .4em;
+
+  --p-sm: .4em;
+  --p-l: 1.2em;
+
+  --aquamarine-60: hsl(151, 28%, 63%);
+  --aquamarine-70: hsl(151, 28%, 75%);
+
+  --color-primary-01:hsl(0, 0%, 9%);
+  --color-primary-01-20:hsl(0, 0%, 9%, .25);
+  --color-primary-03:hsl(0, 0%, 30%);
+  --color-secondary-01:hsl(0, 0%, 94%);
+  --color-terciary-01: var(--aquamarine-60);
+  --color-terciary-02: var(--aquamarine-70);
   --font-primary:Helvetica, Arial, sans-serif;
   --font-secondary: Verdana;
 }
@@ -40,8 +52,8 @@ blockquote:before, blockquote:after, q:before, q:after {
   content: none;
 }
 ::selection {
-  background-color: var(--color-primary);
-  color:var(--color-secondary);
+  background-color: var(--color-primary-01);
+  color:var(--color-secondary-01);
 }
 form, input, textarea, select, button, label, fieldset {
   font-family: inherit;
@@ -50,6 +62,14 @@ form, input, textarea, select, button, label, fieldset {
   background-color: transparent;
   display: block;
   color: inherit;
+}
+button {
+  padding: var(--p-sm) var(--p-l);
+
+  font-weight: bold;
+  border-radius: var(--rounded-sm);
+  transition: background-color 200ms;
+  cursor: pointer;
 }
 table, tr, td {
   border-collapse: collapse;
@@ -64,8 +84,8 @@ body {
   min-height:100vh;
   font-size: 100%;
   font-family: var(--font-primary);
-  color: var(--color-primary);
-  background-color: var(--color-secondary);
+  color: var(--color-primary-01);
+  background-color: var(--color-secondary-01);
   line-height: 1.4em;
   font-smooth: always;
   -webkit-font-smoothing:antialiased;

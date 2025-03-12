@@ -1,0 +1,32 @@
+.Modal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1em;
+
+  background-color: var(--color-secondary-01);
+  border-radius: var(--rounded-sm);
+  padding: 1.5em 1em;
+  &__overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    inset: 0;
+
+    background-color: var(--color-primary-01-20);
+  }
+  &__btn {
+    padding: var(--p-sm);
+    
+    font: {
+      weight: bolder;
+      size: 1.5rem;
+    }
+    transition: 200ms color;
+    &:hover {
+      color: var(--color-primary-03);
+    }
+  }
+}

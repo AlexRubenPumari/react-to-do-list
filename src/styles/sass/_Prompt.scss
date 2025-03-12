@@ -1,0 +1,18 @@
+.Prompt {
+  &__label {
+    font-size: .88em;
+  }
+  &__input {
+    margin-bottom: 1.6em;
+    border-bottom: 3px solid transparent;
+    transition: border-color 200ms;
+    &:focus {
+      outline: none;
+      border-color: var(--color-terciary-01);
+    }
+  }
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+}
