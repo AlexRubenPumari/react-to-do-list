@@ -18,7 +18,7 @@
     background-color: var(--color-primary-01-20);
   }
   &__btn {
-    padding: var(--p-sm);
+    padding: calc(var(--p-sm) * .35) var(--p-sm);
     
     font: {
       weight: bolder;

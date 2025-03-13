@@ -1,37 +1,35 @@
 import useModal from './hooks/useModal.js'
-import Modal from './components/Modal.jsx'
-import Prompt from './components/Prompt.jsx'
+import useTasks from './hooks/useTasks.js'
+import ListOfTasks from './components/ListOfTasks.jsx'
+import ModalManager from './components/ModalManager.jsx'
 import './styles/App.css'
 
 export default function App() {
-  const { isModal, openModal, closeModal } = useModal()
-  const tasks = ['lavar', 'comer', 'dormir']
+  const { modal, openModal, closeModal } = useModal(null)
+  const { tasks, addTask, editTask, deleteTask } = useTasks()
 
   return (
-    <>
-      <h1>Make your dreams come true!</h1>
+    <main className='Container'>
+      <h1 className='Title'>
+        {`Make your dreams come true! (0)`}
+      </h1>
       <div className='TasksContainer'>
-      {
-        tasks.map(task => <p>{task}</p>)
-      }
-        <button
-          className='ButtonPpal'
-          onClick={openModal}
-          >
-          Add task
-        </button>
+        <ListOfTasks 
+          tasks={tasks}
+          callbacks={{ openModal, deleteTask }} 
+        />
       </div>
-      {
-        isModal && (
-          <Modal toClose={closeModal}>
-            <Prompt
-              label='Task name'
-              placeholder='Study for an exam...'
-              toCancel={closeModal}
-            />
-          </Modal>
-        )
-      }
-    </>
+      <button
+        className='ButtonPpal'
+        onClick={() => openModal('add')}
+      >
+        Add task
+      </button>
+      <ModalManager 
+        type={modal}
+        toClose={closeModal} 
+        callbacks={{ addTask, editTask }} 
+      />
+    </main>
   )
 }

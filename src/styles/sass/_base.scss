@@ -6,15 +6,20 @@
 
   --aquamarine-60: hsl(151, 28%, 63%);
   --aquamarine-70: hsl(151, 28%, 75%);
+  --yellow-70: hsl(53, 100%, 74%);
+  --yellow-80: hsl(53, 100%, 88%);
+
 
   --color-primary-01:hsl(0, 0%, 9%);
   --color-primary-01-20:hsl(0, 0%, 9%, .25);
   --color-primary-03:hsl(0, 0%, 30%);
-  --color-secondary-01:hsl(0, 0%, 94%);
+  --color-secondary-01:hsl(0, 0%, 98%);
   --color-terciary-01: var(--aquamarine-60);
   --color-terciary-02: var(--aquamarine-70);
-  --font-primary:Helvetica, Arial, sans-serif;
-  --font-secondary: Verdana;
+  --color-quaternary-01: var(--yellow-80);
+  --color-quaternary-02: var(--yellow-70);
+  --font-primary: Verdana;
+  --font-secondary: Helvetica, Arial, sans-serif;
 }
 * {
   margin: 0;
@@ -69,6 +74,7 @@ button {
   font-weight: bold;
   border-radius: var(--rounded-sm);
   transition: background-color 200ms;
+  user-select: none;
   cursor: pointer;
 }
 table, tr, td {

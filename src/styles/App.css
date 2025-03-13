@@ -1,17 +1,27 @@
+.TasksContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 :root {
   --rounded-sm: .4em;
   --p-sm: .4em;
   --p-l: 1.2em;
   --aquamarine-60: hsl(151, 28%, 63%);
   --aquamarine-70: hsl(151, 28%, 75%);
+  --yellow-70: hsl(53, 100%, 74%);
+  --yellow-80: hsl(53, 100%, 88%);
   --color-primary-01:hsl(0, 0%, 9%);
   --color-primary-01-20:hsl(0, 0%, 9%, .25);
   --color-primary-03:hsl(0, 0%, 30%);
-  --color-secondary-01:hsl(0, 0%, 94%);
+  --color-secondary-01:hsl(0, 0%, 98%);
   --color-terciary-01: var(--aquamarine-60);
   --color-terciary-02: var(--aquamarine-70);
-  --font-primary:Helvetica, Arial, sans-serif;
-  --font-secondary: Verdana;
+  --color-quaternary-01: var(--yellow-80);
+  --color-quaternary-02: var(--yellow-70);
+  --font-primary: Verdana;
+  --font-secondary: Helvetica, Arial, sans-serif;
 }
 
 * {
@@ -76,6 +86,7 @@ button {
   font-weight: bold;
   border-radius: var(--rounded-sm);
   transition: background-color 200ms;
+  user-select: none;
   cursor: pointer;
 }
 
@@ -120,7 +131,7 @@ body {
   background-color: var(--color-primary-01-20);
 }
 .Modal__btn {
-  padding: var(--p-sm);
+  padding: calc(var(--p-sm) * 0.35) var(--p-sm);
   font-weight: bolder;
   font-size: 1.5rem;
   transition: 200ms color;
@@ -146,6 +157,44 @@ body {
   justify-content: space-between;
 }
 
+.Task {
+  width: 20rem;
+  height: 2.2em;
+  padding-left: 1.5em;
+  border-radius: 1.1em/50%;
+  position: relative;
+  line-height: 2.2em;
+  background-color: var(--color-quaternary-01);
+  transition: 200ms background-color;
+  user-select: none;
+  cursor: pointer;
+}
+.Task:hover, .Task.selected {
+  background-color: var(--color-quaternary-02);
+}
+.Task.marked {
+  text-decoration: line-through;
+  background-color: var(--color-primary-01-20);
+  cursor: default;
+}
+.Task__menu {
+  display: flex;
+  gap: 0.5rem;
+  position: absolute;
+  top: 0;
+  left: calc(100% + 0.5rem);
+}
+.Task__btn {
+  width: 2.2em;
+  aspect-ratio: 1/1;
+  padding: 0.6rem;
+  border-radius: 50%;
+  background-color: var(--color-quaternary-01);
+}
+.Task__btn:hover {
+  background-color: var(--color-quaternary-02);
+}
+
 .ButtonPpal {
   background-color: var(--color-terciary-01);
 }
@@ -155,6 +204,25 @@ body {
 .ButtonSec:hover {
   text-decoration: underline;
   text-decoration-thickness: 2px;
+}
+
+.Title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 0.8em;
+}
+
+.TasksContainer {
+  gap: 5px;
+}
+
+.Container {
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+  justify-items: center;
+  gap: 1rem;
+  min-height: 100vh;
+  padding: 2rem 1rem;
 }
 
 /*# sourceMappingURL=App.css.map */

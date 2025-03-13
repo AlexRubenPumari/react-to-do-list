@@ -1,7 +1,8 @@
-@use './config.scss';
+@use './config.scss' as c;
 @use './base.scss';
 @use './Modal.scss';
 @use './Prompt.scss';
+@use './Task.scss';
 
 .Button {
   &Ppal {
@@ -18,4 +19,24 @@
       }
     }
   }
+}
+.Title {
+  font: {
+    size: 1.4rem;
+    weight: bold;
+  }
+  margin-bottom: .8em;
+}
+.TasksContainer {
+  @extend %FlexColumnContainer;
+  gap: 5px;
+}
+.Container {
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+  justify-items: center;
+  gap: 1rem;
+
+  min-height: 100vh;
+  padding: 2rem 1rem;
 }
