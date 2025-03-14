@@ -19,6 +19,7 @@ export default function ModalManager ({ type, toClose, callbacks }) {
       <Prompt
         label='New task name'
         placeholder='Study for an exam...'
+        initialValue={document.querySelector('.Task.selected').textContent}
         btnText='Save'
         toCancel={toClose}
         toAction={newTask => {

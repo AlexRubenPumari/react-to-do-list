@@ -2,10 +2,19 @@ import CheckIcon from './icons/CheckIcon.jsx'
 import DeleteIcon from './icons/DeleteIcon.jsx'
 import EditIcon from './icons/EditIcon.jsx'
 import useTask from '../hooks/useTask.js'
+import { useCallback } from 'react'
+import debounce from 'just-debounce-it';
 
 export default function Task ({ children, callbacks }) {
   const { state, setSelected, setMarked } = useTask()
   const { openModal, deleteTask } = callbacks
+  const debouncedSetState = useCallback(debounce(param => {
+    if (param) {
+      setSelected(param)
+    } else {
+      setMarked()
+    }
+  }, 400))
   const modifyTask = modifierType => {
     if (modifierType === 'edit') {
       openModal('edit')
@@ -21,8 +30,8 @@ export default function Task ({ children, callbacks }) {
   return (
     <div
       className={`Task ${state ?? ''}`}
-      onClick={e => setSelected(e.target)}
-      onDoubleClick={setMarked}>
+      onClick={e => debouncedSetState(e.target)}
+      onDoubleClick={() => debouncedSetState()}>
       { children }
       { 
         state === 'selected' && (

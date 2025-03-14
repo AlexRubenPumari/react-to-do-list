@@ -14,6 +14,7 @@ export default function useTask () {
     } else {
       setState('selected')
     }
+    console.log('selected')
   } 
   const setMarked = () => {
     if (state === 'marked') {
@@ -21,6 +22,7 @@ export default function useTask () {
     } else {
       setState('marked')
     }
+    console.log('marked')
   }
 
   return { state, setSelected, setMarked }
