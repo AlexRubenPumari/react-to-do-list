@@ -114,6 +114,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@media (hover: hover) {
+  .Task__content:hover, .Task__btn:hover {
+    background-color: var(--color-quaternary-02);
+  }
+  .ButtonPpal:hover {
+    background-color: var(--color-terciary-02);
+  }
+  .ButtonSec:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+  .Modal__btn:hover {
+    color: var(--color-primary-03);
+  }
+}
 .Modal {
   display: flex;
   flex-direction: column;
@@ -136,9 +151,6 @@ body {
   font-weight: bolder;
   font-size: 1.5rem;
   transition: 200ms color;
-}
-.Modal__btn:hover {
-  color: var(--color-primary-03);
 }
 
 .Prompt__label {
@@ -180,7 +192,7 @@ body {
   user-select: none;
   cursor: pointer;
 }
-.Task__content:hover, .Task__content.selected {
+.Task__content.selected {
   background-color: var(--color-quaternary-02);
 }
 .Task__content.marked {
@@ -203,19 +215,9 @@ body {
   border-radius: 50%;
   background-color: var(--color-quaternary-01);
 }
-.Task__btn:hover {
-  background-color: var(--color-quaternary-02);
-}
 
 .ButtonPpal {
   background-color: var(--color-terciary-01);
-}
-.ButtonPpal:hover {
-  background-color: var(--color-terciary-02);
-}
-.ButtonSec:hover {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
 }
 
 .Title {

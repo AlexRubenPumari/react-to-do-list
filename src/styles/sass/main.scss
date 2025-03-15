@@ -7,17 +7,6 @@
 .Button {
   &Ppal {
     background-color: var(--color-terciary-01);
-    &:hover {
-      background-color: var(--color-terciary-02);
-    }
-  }
-  &Sec {
-    &:hover {
-      text: {
-        decoration: underline;
-        decoration-thickness: 2px;
-      }
-    }
   }
 }
 .Title {
