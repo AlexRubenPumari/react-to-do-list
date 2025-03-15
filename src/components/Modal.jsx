@@ -5,7 +5,7 @@ export default function Modal ({ children, toClose }) {
         <button className='Modal__btn' onClick={toClose}>
           ×
         </button>
-        <div className='Modal__body'>{children}</div>
+        <div className='Modal__body'>{ children }</div>
       </div>
     </div>
   )

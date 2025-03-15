@@ -11,6 +11,12 @@ function WithoutTasks () {
 }
 function Tasks ({ tasks, callbacks }) {
   return tasks.map(({ name, isMarked}) => (
-    <Task key={name} initialIsMarked={isMarked} callbacks={callbacks}>{name}</Task>
+    <Task 
+      key={name} 
+      initialIsMarked={isMarked}
+      callbacks={callbacks}
+    >
+      { name }
+    </Task>
   ))
 }

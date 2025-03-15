@@ -1,9 +1,17 @@
 .Prompt {
   &__label {
-    font-size: .88em;
+    font-size: var(--fs-xs);
+  }
+  &__inputContainer {
+    position: relative;
+    margin-bottom: 2.6em;
+  }
+  &__error {
+    position: absolute;
+    top: 100%;
+    left: 0;
   }
   &__input {
-    margin-bottom: 1.6em;
     border-bottom: 3px solid transparent;
     transition: border-color 200ms;
     &:focus {

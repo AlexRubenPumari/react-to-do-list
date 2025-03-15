@@ -1,32 +1,41 @@
 import { useState } from 'react'
 
 export default function Prompt ({ 
-  label, 
-  placeholder,
-  initialValue = '',
-  btnText, 
-  toAction, 
-  toCancel 
+  label, placeholder, btnText, toAction, toCancel, initialValue = ''
 }) {
   const [value, setValue] = useState(initialValue)
+  const [error, setError] = useState(null)
   const handleSubmit = e => {
     e.preventDefault()
-
-    const newTask = e.target.prompt.value
-    toAction(newTask)
-
-    setValue('')
+    
+    const Prompt = e.target.prompt
+    const newTask = Prompt.value
+    const error = toAction(newTask)
+    if (error) {
+      setError(error)
+      Prompt.focus()
+    } else {
+      setValue('')
+    }
+  }
+  const handleChange = e => {
+    setValue(e.target.value)
+    setError(null)
   }
   return (
     <form onSubmit={handleSubmit}>
       <label className='Prompt__label'>{`${label}:`}</label>
-      <input 
-        className='Prompt__input' 
-        name='prompt'
-        placeholder={placeholder} 
-        value={value}
-        onChange={e => setValue(e.target.value)}
-        autoFocus/>
+      <div className='Prompt__inputContainer'>
+        <input 
+          className='Prompt__input' 
+          name='prompt'
+          placeholder={placeholder} 
+          value={value}
+          onChange={handleChange}
+          autoFocus
+        />
+        { error && <p className='Prompt__error error'>{error}</p> }
+      </div>
       <div className='Prompt__buttons'>
         <button type='submit' className='ButtonPpal'>{btnText}</button>
         <button onClick={toCancel} className='ButtonSec'>Cancel</button>

@@ -5,6 +5,7 @@
 }
 
 :root {
+  --fs-xs: .88em;
   --rounded-sm: .4em;
   --p-sm: .4em;
   --p-l: 1.2em;
@@ -141,10 +142,18 @@ body {
 }
 
 .Prompt__label {
-  font-size: 0.88em;
+  font-size: var(--fs-xs);
+}
+.Prompt__inputContainer {
+  position: relative;
+  margin-bottom: 2.6em;
+}
+.Prompt__error {
+  position: absolute;
+  top: 100%;
+  left: 0;
 }
 .Prompt__input {
-  margin-bottom: 1.6em;
   border-bottom: 3px solid transparent;
   transition: border-color 200ms;
 }
@@ -226,6 +235,12 @@ body {
   gap: 1rem;
   min-height: 100vh;
   padding: 2rem 1rem;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  font-size: var(--fs-xs);
 }
 
 /*# sourceMappingURL=App.css.map */

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { getTasksFromStorage } from '../logic/storage.js'
-import { isNotValidTask } from '../logic/task.js'
+import { loadTasks, saveTasks } from '../logic/storage.js'
+import { isNotValidTask, getSelectedTask } from '../logic/task.js'
 
 export default function useTasks() {
-  const [tasks, setTasks] = useState(() => getTasksFromStorage())
+  const [tasks, setTasks] = useState(() => loadTasks())
   const numMarkedTasks = tasks.reduce((counter, { isMarked }) => {
     return isMarked ? counter + 1: counter
   }, 0)
@@ -16,14 +16,16 @@ export default function useTasks() {
     setTasks(newTasks)
   }
   const deleteTask = task => {
-    task = task ?? document.querySelector('.Task__content.selected').textContent
+    task = task ?? getSelectedTask()
 
     const newTasks = structuredClone(tasks).filter(({ name }) => name !== task)
     setTasks(newTasks)
   }
   const editTask = (newTask, task) => {
-    task = task ?? document.querySelector('.Task__content.selected').textContent
-    
+    const isNotValid = isNotValidTask(newTask, tasks)
+    if (isNotValid) return isNotValid
+
+    task = task ?? getSelectedTask()
     const newTasks = structuredClone(tasks)
     const index = newTasks.findIndex(({ name }) => name === task)
     newTasks[index].name = newTask
@@ -37,10 +39,7 @@ export default function useTasks() {
 
     setTasks(newTasks)
   }
-  useEffect(() => {
-    console.log('Guardando datos en Local Storage')
-    window.localStorage.setItem('tasks', JSON.stringify(tasks))
-  }, [tasks])
+  useEffect(() => saveTasks(tasks), [tasks])
 
   return { tasks, addTask, editTask, deleteTask, saveMarkFor, numMarkedTasks }
 }

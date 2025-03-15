@@ -18,3 +18,4 @@ export function isValidSelection (state) {
   }
   return true
 }
+export const getSelectedTask = () => document.querySelector('.Task__content.selected').textContent

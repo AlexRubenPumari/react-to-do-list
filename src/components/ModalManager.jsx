@@ -1,8 +1,13 @@
 import Modal from './Modal.jsx'
 import Prompt from './Prompt.jsx'
+import { getSelectedTask } from '../logic/task.js'
 
 export default function ModalManager ({ type, onClose, callbacks }) {
   const { addTask, editTask } = callbacks
+  const editTaskFromModal = newTask => {
+    const hasError = editTask(newTask)
+    return hasError || onClose()
+  }
   if (type === 'add') return (
     <Modal toClose={onClose}>
       <Prompt
@@ -19,13 +24,10 @@ export default function ModalManager ({ type, onClose, callbacks }) {
       <Prompt
         label='New task name'
         placeholder='Study for an exam...'
-        initialValue={document.querySelector('.Task__content.selected').textContent}
+        initialValue={getSelectedTask()}
         btnText='Save'
         toCancel={onClose}
-        toAction={newTask => {
-          editTask(newTask)
-          onClose()
-        }}
+        toAction={editTaskFromModal}
       />
     </Modal>
   )

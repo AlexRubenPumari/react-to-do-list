@@ -2,8 +2,8 @@ import CheckIcon from './icons/CheckIcon.jsx'
 import DeleteIcon from './icons/DeleteIcon.jsx'
 import EditIcon from './icons/EditIcon.jsx'
 import useTask from '../hooks/useTask.js'
+import debounce from 'just-debounce-it'
 import { useCallback } from 'react'
-import debounce from 'just-debounce-it';
 
 export default function Task ({ children, callbacks, initialIsMarked }) {
   const { openModal, deleteTask, saveMarkFor } = callbacks
