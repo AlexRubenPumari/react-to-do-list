@@ -10,5 +10,7 @@ function WithoutTasks () {
   return <p>Create a task. Set yourself challenges!</p>
 }
 function Tasks ({ tasks, callbacks }) {
-  return tasks.map(task => <Task key={task} callbacks={callbacks}>{task}</Task>)
+  return tasks.map(({ name, isMarked}) => (
+    <Task key={name} initialIsMarked={isMarked} callbacks={callbacks}>{name}</Task>
+  ))
 }

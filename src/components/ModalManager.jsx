@@ -1,30 +1,30 @@
 import Modal from './Modal.jsx'
 import Prompt from './Prompt.jsx'
 
-export default function ModalManager ({ type, toClose, callbacks }) {
+export default function ModalManager ({ type, onClose, callbacks }) {
   const { addTask, editTask } = callbacks
   if (type === 'add') return (
-    <Modal toClose={toClose}>
+    <Modal toClose={onClose}>
       <Prompt
         label='Task name'
         placeholder='Study for an exam...'
         btnText='Add'
-        toCancel={toClose}
+        toCancel={onClose}
         toAction={addTask}
       />
     </Modal>
   )
   if (type === 'edit') return (
-    <Modal toClose={toClose}>
+    <Modal toClose={onClose}>
       <Prompt
         label='New task name'
         placeholder='Study for an exam...'
-        initialValue={document.querySelector('.Task.selected').textContent}
+        initialValue={document.querySelector('.Task__content.selected').textContent}
         btnText='Save'
-        toCancel={toClose}
+        toCancel={onClose}
         toAction={newTask => {
           editTask(newTask)
-          toClose()
+          onClose()
         }}
       />
     </Modal>

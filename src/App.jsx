@@ -6,17 +6,17 @@ import './styles/App.css'
 
 export default function App() {
   const { modal, openModal, closeModal } = useModal(null)
-  const { tasks, addTask, editTask, deleteTask } = useTasks()
+  const { tasks, addTask, editTask, deleteTask, saveMarkFor, numMarkedTasks } = useTasks()
 
   return (
     <main className='Container'>
       <h1 className='Title'>
-        {`Make your dreams come true! (0)`}
+        {`Make your dreams come true! (${numMarkedTasks})`}
       </h1>
       <div className='TasksContainer'>
         <ListOfTasks 
           tasks={tasks}
-          callbacks={{ openModal, deleteTask }} 
+          callbacks={{ openModal, deleteTask, saveMarkFor }} 
         />
       </div>
       <button
@@ -27,7 +27,7 @@ export default function App() {
       </button>
       <ModalManager 
         type={modal}
-        toClose={closeModal} 
+        onClose={closeModal} 
         callbacks={{ addTask, editTask }} 
       />
     </main>

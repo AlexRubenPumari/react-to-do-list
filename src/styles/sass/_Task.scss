@@ -1,43 +1,44 @@
 .Task {
-	$taskHeight: 2.2em;
-	
-	width: 20rem;
-	height: $taskHeight;
-	padding-left: 1.5em;
-	border-radius: calc($taskHeight*.5) / 50%;
+  $taskHeight: 2.2em;
 	position: relative;
-	
-	line-height: $taskHeight;
-	background-color: var(--color-quaternary-01);
-	transition: 200ms background-color;
-	user-select: none;
-	cursor: pointer;
+  &__content {
+    width: 20rem;
+    height: $taskHeight;
+    padding-left: 1.5em;
+    border-radius: calc($taskHeight * 0.5) / 50%;
 
-	&:hover, &.selected {
-		background-color: var(--color-quaternary-02)
-	}
-	&.marked {
-		text-decoration: line-through;
-		background-color: var(--color-primary-01-20);
-		cursor: default;
-	}
-	&__menu {
-		display: flex;
-		gap: .5rem;
+    line-height: $taskHeight;
+    background-color: var(--color-quaternary-01);
+    transition: 200ms background-color;
+    user-select: none;
+    cursor: pointer;
+    &:hover, &.selected {
+      background-color: var(--color-quaternary-02);
+    }
+    &.marked {
+      text-decoration: line-through;
+      background-color: var(--color-primary-01-20);
+      cursor: default;
+    }
+  }
+  &__menu {
+    display: flex;
+    gap: 0.5rem;
 
-		position: absolute;
-		top: 0;
-		left: calc(100% + .5rem);
-	}
-	&__btn {
-		width: $taskHeight;
-		aspect-ratio: 1/1;
-		padding: .6rem;
-		border-radius: 50%;
-		
-		background-color: var(--color-quaternary-01);
-		&:hover {
-			background-color: var(--color-quaternary-02);
-		}
-	}
+    position: absolute;
+    top: 0;
+    left: calc(100% + 0.5rem);
+    cursor: default;
+  }
+  &__btn {
+    width: $taskHeight;
+    aspect-ratio: 1/1;
+    padding: 0.6rem;
+    border-radius: 50%;
+
+    background-color: var(--color-quaternary-01);
+    &:hover {
+      background-color: var(--color-quaternary-02);
+    }
+  }
 }

@@ -1,28 +1,24 @@
 import { useState } from 'react'
+import { isValidSelection } from '../logic/task.js'
 
-export default function useTask () {
-  const [state, setState] = useState(null)
-  const setSelected = (element) => {
-    const isAnySelectedTask = !!document.querySelector('.Task.selected')
-    const isSelected = element.className === 'Task selected'
-    
-    if (isAnySelectedTask && !isSelected) return
-    if (state === 'marked') return
+export default function useTask ({ initialIsMarked, saveMarkFor }) {
+  const [state, setState] = useState(() => initialIsMarked ? 'marked' : null)
+  const setSelected = () => {
+    if (!isValidSelection(state)) return
 
     if (state === 'selected') {
       setState(null)
     } else {
       setState('selected')
     }
-    console.log('selected')
   } 
-  const setMarked = () => {
+  const setMarked = task => {
     if (state === 'marked') {
       setState(null)
     } else {
       setState('marked')
     }
-    console.log('marked')
+    saveMarkFor(task)
   }
 
   return { state, setSelected, setMarked }

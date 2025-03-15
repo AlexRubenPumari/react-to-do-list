@@ -5,63 +5,58 @@ import useTask from '../hooks/useTask.js'
 import { useCallback } from 'react'
 import debounce from 'just-debounce-it';
 
-export default function Task ({ children, callbacks }) {
-  const { state, setSelected, setMarked } = useTask()
-  const { openModal, deleteTask } = callbacks
-  const debouncedSetState = useCallback(debounce(param => {
-    if (param) {
-      setSelected(param)
-    } else {
-      setMarked()
-    }
-  }, 400))
-  const modifyTask = modifierType => {
-    if (modifierType === 'edit') {
-      openModal('edit')
-    }
-    if (modifierType === 'delete') {
-      deleteTask()
-    }
-    if (modifierType === 'mark') {
-      setMarked()
-    }
-  }
+export default function Task ({ children, callbacks, initialIsMarked }) {
+  const { openModal, deleteTask, saveMarkFor } = callbacks
+  const { state, setSelected, setMarked } = useTask({
+    initialIsMarked, saveMarkFor
+  })
+  const actionOf = (action, e) => {
+    const task = e.currentTarget 
+      ? e.currentTarget.parentNode.parentNode.textContent 
+      : e.target.textContent
 
+    if (action === 'edit') openModal('edit')
+    if (action === 'select') setSelected()
+    if (action === 'mark') setMarked(task)
+    if (action === 'delete') deleteTask(task)
+  }
+  const debouncedActionOf = useCallback(
+    debounce((action, e) => actionOf(action, e), 400)
+  )
   return (
-    <div
-      className={`Task ${state ?? ''}`}
-      onClick={e => debouncedSetState(e.target)}
-      onDoubleClick={() => debouncedSetState()}>
-      { children }
-      { 
-        state === 'selected' && (
-          <TaskMenu modifyTask={modifyTask} />
-        ) 
-      }
+    <div className='Task'>
+      <p
+        className={`Task__content ${state ?? ''}`}
+        onClick={e => debouncedActionOf('select', e)}
+        onDoubleClick={e => debouncedActionOf('mark', e)}
+      >
+        { children }
+      </p>
+      { state === 'selected' && <TaskMenu managerActions={actionOf}/> }
     </div>
   )
 }
-function TaskMenu ({ modifyTask }) {
+function TaskMenu ({ managerActions }) {
   return (
     <div className='Task__menu'>
       <button 
         className='Task__btn'
         title='Mark as completed'
-        onClick={() => modifyTask('mark')}
+        onClick={e => managerActions('mark', e)}
       >
         <CheckIcon />
       </button>
       <button 
-        className='Task__btn' 
+        className='Task__btn'
         title='Edit task' 
-        onClick={() => modifyTask('edit')}
+        onClick={e => managerActions('edit', e)}
       >
         <EditIcon />
       </button>
       <button 
         className='Task__btn' 
         title='Delete task' 
-        onClick={() => modifyTask('delete')}
+        onClick={e => managerActions('delete', e)}
       >
         <DeleteIcon />
       </button>
