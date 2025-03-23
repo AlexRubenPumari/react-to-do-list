@@ -2,6 +2,7 @@ import useModal from './hooks/useModal.js'
 import useTasks from './hooks/useTasks.js'
 import ListOfTasks from './components/ListOfTasks.jsx'
 import ModalManager from './components/ModalManager.jsx'
+import PlusIcon from './components/icons/PlusIcon.jsx'
 import './styles/App.css'
 
 export default function App() {
@@ -9,7 +10,7 @@ export default function App() {
   const { tasks, addTask, editTask, deleteTask, saveMarkFor, numMarkedTasks } = useTasks()
 
   return (
-    <main className='Container'>
+    <main className='ContainerPpal'>
       <h1 className='Title'>
         {`Make your dreams come true! (${numMarkedTasks})`}
       </h1>
@@ -20,10 +21,10 @@ export default function App() {
         />
       </div>
       <button
-        className='ButtonPpal'
+        className='ContainerPpal__btnAdd ButtonPpal rounded'
         onClick={() => openModal('add')}
       >
-        Add task
+        <PlusIcon />
       </button>
       <ModalManager 
         type={modal}
