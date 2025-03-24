@@ -7,10 +7,12 @@
     "dev": "vite",
     "host": "vite --host --port 5500",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
+    "gh-pages": "^6.3.0",
     "vite": "^6.2.0"
   },
   "dependencies": {
