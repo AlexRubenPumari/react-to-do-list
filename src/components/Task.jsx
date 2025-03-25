@@ -5,14 +5,15 @@ import useTask from '../hooks/useTask.js'
 import debounce from 'just-debounce-it'
 import { useCallback } from 'react'
 
-export default function Task ({ children, callbacks, initialIsMarked }) {
+export default function Task({ children, callbacks, initialIsMarked }) {
   const { openModal, deleteTask, saveMarkFor } = callbacks
   const { state, setSelected, setMarked } = useTask({
-    initialIsMarked, saveMarkFor
+    initialIsMarked,
+    saveMarkFor,
   })
   const actionOf = (action, e) => {
-    const task = e.currentTarget 
-      ? e.currentTarget.parentNode.parentNode.textContent 
+    const task = e.currentTarget
+      ? e.currentTarget.parentNode.parentNode.textContent
       : e.target.textContent
 
     if (action === 'edit') openModal('edit')
@@ -28,37 +29,33 @@ export default function Task ({ children, callbacks, initialIsMarked }) {
       <p
         className={`Task__content ${state ?? ''}`}
         onClick={e => debouncedActionOf('select', e)}
-        onDoubleClick={e => debouncedActionOf('mark', e)}
-      >
-        { children }
+        onDoubleClick={e => debouncedActionOf('mark', e)}>
+        {children}
       </p>
-      { state === 'selected' && <TaskMenu managerActions={actionOf}/> }
+      {state === 'selected' && <TaskMenu managerActions={actionOf} />}
     </div>
   )
 }
-function TaskMenu ({ managerActions }) {
+function TaskMenu({ managerActions }) {
   return (
     <div className='Task__menu'>
-      <button 
-        className='Task__btn'
+      <button
+        className='CircleButton CircleButton--taskOptions'
         title='Mark as completed'
-        onClick={e => managerActions('mark', e)}
-      >
-        <CheckIcon />
+        onClick={e => managerActions('mark', e)}>
+        <CheckIcon className='CircleButton__icon CircleButton__icon--taskOptions' />
       </button>
-      <button 
-        className='Task__btn'
-        title='Edit task' 
-        onClick={e => managerActions('edit', e)}
-      >
-        <EditIcon />
+      <button
+        className='CircleButton CircleButton--taskOptions'
+        title='Edit task'
+        onClick={e => managerActions('edit', e)}>
+        <EditIcon className='CircleButton__icon CircleButton__icon--taskOptions' />
       </button>
-      <button 
-        className='Task__btn' 
-        title='Delete task' 
-        onClick={e => managerActions('delete', e)}
-      >
-        <DeleteIcon />
+      <button
+        className='CircleButton CircleButton--taskOptions'
+        title='Delete task'
+        onClick={e => managerActions('delete', e)}>
+        <DeleteIcon className='CircleButton__icon CircleButton__icon--taskOptions' />
       </button>
     </div>
   )

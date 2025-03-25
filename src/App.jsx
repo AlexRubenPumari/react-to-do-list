@@ -7,29 +7,28 @@ import './styles/App.css'
 
 export default function App() {
   const { modal, openModal, closeModal } = useModal(null)
-  const { tasks, addTask, editTask, deleteTask, saveMarkFor, numMarkedTasks } = useTasks()
-
+  const { tasks, addTask, editTask, deleteTask, saveMarkFor, numMarkedTasks } =
+    useTasks()
   return (
     <main className='ContainerPpal'>
       <h1 className='Title'>
         {`Make your dreams come true! (${numMarkedTasks})`}
       </h1>
       <div className='TasksContainer'>
-        <ListOfTasks 
+        <ListOfTasks
           tasks={tasks}
-          callbacks={{ openModal, deleteTask, saveMarkFor }} 
+          callbacks={{ openModal, deleteTask, saveMarkFor }}
         />
       </div>
       <button
-        className='ContainerPpal__btnAdd ButtonPpal rounded'
-        onClick={() => openModal('add')}
-      >
-        <PlusIcon />
+        className='CircleButton CircleButton--addTask'
+        onClick={() => openModal('add')}>
+        <PlusIcon className='CircleButton__icon' />
       </button>
-      <ModalManager 
+      <ModalManager
         type={modal}
-        onClose={closeModal} 
-        callbacks={{ addTask, editTask }} 
+        onClose={closeModal}
+        callbacks={{ addTask, editTask }}
       />
     </main>
   )

@@ -1,6 +1,6 @@
-export default function DeleteIcon () {
+export default function DeleteIcon ({ className }) {
   return (
-    <svg viewBox='0 -0.5 21 21'>
+    <svg viewBox='0 -0.5 21 21' className={className}>
       <g stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
         <g transform='translate(-179.000000, -360.000000)' fill='currentColor'>
           <g id='icons' transform='translate(56.000000, 160.000000)'>

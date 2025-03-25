@@ -4,11 +4,12 @@
   --rounded-sm: .4em;
 
   --p-sm: .4em;
+  --p-m: .9em;
   --p-l: 1.2em;
 
   --aquamarine-50: hsl(151, 28%, 55%);
   --aquamarine-60: hsl(151, 28%, 63%);
-  --yellow-70: hsl(53, 100%, 74%);
+  --yellow-50: hsl(53, 100%, 54%);
   --yellow-80: hsl(53, 100%, 88%);
 
 
@@ -19,9 +20,11 @@
   --color-terciary-01: var(--aquamarine-60);
   --color-terciary-02: var(--aquamarine-50);
   --color-quaternary-01: var(--yellow-80);
-  --color-quaternary-02: var(--yellow-70);
+  --color-quaternary-02: var(--yellow-50);
   --font-primary: Verdana;
   --font-secondary: Helvetica, Arial, sans-serif;
+
+  --taskHeight: 2.2em;
 }
 * {
   margin: 0;

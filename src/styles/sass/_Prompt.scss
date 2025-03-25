@@ -6,11 +6,6 @@
     position: relative;
     margin-bottom: 2.6em;
   }
-  &__error {
-    position: absolute;
-    top: 100%;
-    left: 0;
-  }
   &__input {
     border-bottom: 3px solid transparent;
     transition: border-color 200ms;

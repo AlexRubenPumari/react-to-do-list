@@ -1,20 +1,16 @@
 @use './config.scss' as c;
 @use './base.scss';
+@use './buttons.scss';
 @use './Modal.scss';
 @use './Prompt.scss';
 @use './Task.scss';
 
-.Button {
-  &Ppal {
-    background-color: var(--color-terciary-01);
-  }
-}
 .Title {
   font: {
     size: 1.4rem;
     weight: bold;
   }
-  margin-bottom: .8em;
+  margin-bottom: 0.8em;
 }
 .TasksContainer {
   @extend %FlexColumnContainer;
@@ -25,17 +21,9 @@
   grid-template-rows: min-content auto;
   justify-items: center;
   gap: 1rem;
-
+  position: relative;
   height: 100dvh;
   padding: 2rem 1rem;
-  border: 5px solid red;
-  &__btnAdd {
-    width: 4em;
-    padding: var(--p-l);    
-    position: fixed;
-    bottom: 1rem;
-    right: .8rem;
-  }
 }
 .error {
   color: red;
@@ -43,36 +31,60 @@
     weight: bold;
     size: var(--fs-xs);
   }
-}
-.rounded {
-  border-radius: 50%;
-  aspect-ratio: 1/1;
+  &--prompt {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
 }
 
 @media (hover: hover) {
   .Task {
-    &__content:hover, &__btn:hover {
+    &__content:hover {
       background-color: var(--color-quaternary-02);
     }
   }
   .Button {
-    &Ppal:hover {
+    &--ppal:hover {
       background-color: var(--color-terciary-02);
     }
-    &Sec:hover {
+    &--sec:hover {
       text: {
         decoration: underline;
         decoration-thickness: 2px;
       }
     }
   }
-  .Modal__btn:hover {
-    color: var(--color-primary-03);
+  .CircleButton {
+    &--addTask:hover {
+      background-color: var(--color-terciary-02);
+    }
+    &--taskOptions:hover {
+      background-color: var(--color-quaternary-02);
+    }
+  }
+  .CloseButton {
+    &:hover {
+      color: var(--color-primary-03);
+    }
+  }
+}
+@media (hover: none) {
+  :root {
+    --p-sm: 0.6em;
+    --p-m: 1.1em;
+    --p-l: 1.8em;
+  }
+  * {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 @media (max-width: 700px) {
   .Task__menu {
-    height: min-content;
+    background-color: var(--color-quaternary-01);
+    border-radius: 1em / 50%;
+    padding: var(--p-sm) var(--p-l);
+    height: 3em;
     position: fixed;
     left: 50%;
     bottom: 1.9rem;

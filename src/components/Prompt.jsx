@@ -34,11 +34,11 @@ export default function Prompt ({
           onChange={handleChange}
           autoFocus
         />
-        { error && <p className='Prompt__error error'>{error}</p> }
+        { error && <p className='error error--prompt'>{error}</p> }
       </div>
       <div className='Prompt__buttons'>
-        <button type='submit' className='ButtonPpal'>{btnText}</button>
-        <button onClick={toCancel} className='ButtonSec'>Cancel</button>
+        <button type='submit' className='Button--ppal'>{btnText}</button>
+        <button onClick={toCancel} className='Button--sec'>Cancel</button>
       </div>
     </form>
   )

@@ -1,17 +1,15 @@
 .Task {
-  $taskHeight: 2.2em;
 	position: relative;
   &__content {
     width: 20rem;
-    height: $taskHeight;
-    padding-left: 1.5em;
-    border-radius: calc($taskHeight * 0.5) / 50%;
-
-    line-height: $taskHeight;
+    padding: var(--p-sm) 0 var(--p-sm) 1.5em;
+    border-radius: 1em / 50%;
     background-color: var(--color-quaternary-01);
     transition: 200ms background-color;
     user-select: none;
     cursor: pointer;
+
+
     &.selected {
       background-color: var(--color-quaternary-02);
     }
@@ -23,19 +21,11 @@
   }
   &__menu {
     display: flex;
-    gap: 0.5rem;
-
+    gap: calc(var(--p-m) * 1.3);
+    height: 100%;
     position: absolute;
     bottom: 0;
-    left: calc(100% + 0.5rem);
+    left: calc(100% + calc(var(--p-m) * 1));
     cursor: default;
-  }
-  &__btn {
-    width: $taskHeight;
-    aspect-ratio: 1/1;
-    padding: 0.6rem;
-    border-radius: 50%;
-
-    background-color: var(--color-quaternary-01);
   }
 }
