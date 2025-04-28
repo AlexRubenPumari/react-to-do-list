@@ -1,3 +1,5 @@
+@use './config' as c;
+
 .Modal {
   display: flex;
   flex-direction: column;
@@ -5,16 +7,13 @@
   gap: 1em;
 
   background-color: var(--color-secondary-01);
-  border-radius: var(--rounded-sm);
+  border-radius: c.$rounded-sm;
   padding: 1.5em 1em;
   &__overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %flex-center;
 
     position: absolute;
     inset: 0;
-
-    background-color: var(--color-primary-01-20);
+    background-color: red;
   }
 }

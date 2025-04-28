@@ -1,35 +1,36 @@
-import useModal from './hooks/useModal.js'
-import useTasks from './hooks/useTasks.js'
+import { useContext, useEffect } from 'react'
+import { TasksContext } from './contexts/tasks.jsx'
 import ListOfTasks from './components/ListOfTasks.jsx'
-import ModalManager from './components/ModalManager.jsx'
-import PlusIcon from './components/icons/PlusIcon.jsx'
+import AddTaskForm from './components/AddTaskForm.jsx'
 import './styles/App.css'
 
 export default function App() {
-  const { modal, openModal, closeModal } = useModal(null)
-  const { tasks, addTask, editTask, deleteTask, saveMarkFor, numMarkedTasks } =
-    useTasks()
+  const { numTasks } = useContext(TasksContext)
+  useEffect(() => {
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', () => {
+        const newHeight = window.visualViewport.height
+        document.body.style.height = `${newHeight}px`
+      })
+    } else {
+      window.addEventListener('resize', () => {
+        const newHeight = window.innerHeight
+        document.body.style.height = `${newHeight}px`
+      })
+    }
+  }, [])
+  useEffect(() => {
+    document.addEventListener(
+      'touchmove', e => e.preventDefault(), { passive: false }
+    )
+  })
   return (
     <main className='ContainerPpal'>
-      <h1 className='Title'>
-        {`Make your dreams come true! (${numMarkedTasks})`}
-      </h1>
+      <h1 className='Title'>{`Make the most of today! (${numTasks})`}</h1>
       <div className='TasksContainer'>
-        <ListOfTasks
-          tasks={tasks}
-          callbacks={{ openModal, deleteTask, saveMarkFor }}
-        />
+        <ListOfTasks />
       </div>
-      <button
-        className='CircleButton CircleButton--addTask'
-        onClick={() => openModal('add')}>
-        <PlusIcon className='CircleButton__icon' />
-      </button>
-      <ModalManager
-        type={modal}
-        onClose={closeModal}
-        callbacks={{ addTask, editTask }}
-      />
+      <AddTaskForm />
     </main>
   )
 }

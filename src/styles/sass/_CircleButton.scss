@@ -1,0 +1,33 @@
+@use './config.scss' as c;
+
+.CircleButton {
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+
+  background-color: var(--aquamarine-60);
+  &__icon {
+    width: 1.1em;
+  }
+  &--outterTaskInput {
+    @extend %flex-center;
+
+    width: c.$chat-heigth;
+    min-width: c.$chat-heigth;
+    padding: 0;
+
+    color: var(--black-90);
+  }
+  &--innerTaskInput {
+    padding: var(--p-sm);
+    
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    background-color: initial;
+    transform: translateY(-50%);
+  }
+  &--back {
+    padding: var(--p-m);
+    background-color: transparent;
+  }
+}

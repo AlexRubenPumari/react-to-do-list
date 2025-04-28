@@ -1,0 +1,18 @@
+@use './config' as c;
+
+.Overlay {
+  position: absolute;
+  background-color: hsl(0, 0%, 0%, .4);
+  inset: 0;
+  z-index: 10;
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: .65em;
+
+    height: 3.5em;
+    padding: 0 c.$lateral-padding;
+
+    background-color: var(--color-secondary-02);
+  }
+}

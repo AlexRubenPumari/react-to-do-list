@@ -1,0 +1,17 @@
+.Menu {
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+
+  outline: 1px solid var(--color-secondary-03);
+  background: var(--color-secondary-01);
+  user-select: none;
+  z-index: 1;
+  &__item {
+    padding: var(--p-sm) var(--p-m);
+
+    cursor: pointer;
+    transition: background-color 200ms;
+  }
+}

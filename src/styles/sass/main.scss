@@ -1,9 +1,12 @@
 @use './config.scss' as c;
 @use './base.scss';
-@use './buttons.scss';
+@use './CircleButton.scss';
 @use './Modal.scss';
 @use './Prompt.scss';
 @use './Task.scss';
+@use './TaskInput.scss';
+@use './Menu.scss';
+@use './Overlay';
 
 .Title {
   font: {
@@ -11,19 +14,26 @@
     weight: bold;
   }
   margin-bottom: 0.8em;
+  text-align: center;
+  &--flex {
+    margin-bottom: 0;
+  }
 }
 .TasksContainer {
-  @extend %FlexColumnContainer;
+  @extend %column-flex-center;
   gap: 5px;
+  width: 100%;
 }
 .ContainerPpal {
   display: grid;
   grid-template-rows: min-content auto;
   justify-items: center;
   gap: 1rem;
-  position: relative;
-  height: 100dvh;
-  padding: 2rem 1rem;
+
+  padding: 2rem c.$lateral-padding;
+  width: c.$ideal-width;
+  max-width: 100%;
+  margin: 0 auto;
 }
 .error {
   color: red;
@@ -40,32 +50,24 @@
 
 @media (hover: hover) {
   .Task {
-    &__content:hover {
-      background-color: var(--color-quaternary-02);
-    }
-  }
-  .Button {
-    &--ppal:hover {
-      background-color: var(--color-terciary-02);
-    }
-    &--sec:hover {
-      text: {
-        decoration: underline;
-        decoration-thickness: 2px;
-      }
+    &:hover {
+      background-color: var(--yellow-50);
     }
   }
   .CircleButton {
-    &--addTask:hover {
-      background-color: var(--color-terciary-02);
+    &:hover {
+      background-color: var(--aquamarine-50);
     }
-    &--taskOptions:hover {
-      background-color: var(--color-quaternary-02);
+    &--innerTaskInput:hover {
+      background-color: var(--color-secondary-03);
+    }
+    &--back:hover {
+      background-color: var(--color-secondary-03);
     }
   }
-  .CloseButton {
-    &:hover {
-      color: var(--color-primary-03);
+  .Menu {
+    &__item:hover {
+      background-color: var(--color-secondary-02);
     }
   }
 }
@@ -77,17 +79,5 @@
   }
   * {
     -webkit-tap-highlight-color: transparent;
-  }
-}
-@media (max-width: 700px) {
-  .Task__menu {
-    background-color: var(--color-quaternary-01);
-    border-radius: 1em / 50%;
-    padding: var(--p-sm) var(--p-l);
-    height: 3em;
-    position: fixed;
-    left: 50%;
-    bottom: 1.9rem;
-    transform: translateX(-50%);
   }
 }

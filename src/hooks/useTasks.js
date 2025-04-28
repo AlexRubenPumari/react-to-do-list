@@ -1,45 +1,75 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { TASK_STATES } from '../config/constants.js'
 import { loadTasks, saveTasks } from '../logic/storage.js'
-import { isNotValidTask, getSelectedTask } from '../logic/task.js'
+import { add, edit, remove, select, check } from '../logic/tasks.js'
 
 export default function useTasks() {
+  const { INITIAL, SELECTED, CHECKED } = TASK_STATES
   const [tasks, setTasks] = useState(() => loadTasks())
-  const numMarkedTasks = tasks.reduce((counter, { isMarked }) => {
-    return isMarked ? counter + 1: counter
-  }, 0)
+
   const addTask = task => {
-    const isNotValid = isNotValidTask(task, tasks)
-    if (isNotValid) return isNotValid
+    const { error, newTasks } = add(task, tasks)
+    if (error) return error
 
-    const newTasks = structuredClone(tasks)
-    newTasks.unshift({ name: task, isMarked: false })
+    saveTasks(newTasks)
     setTasks(newTasks)
   }
+
+  const editTask = (task, newTask) => {
+    const { error, newTasks } = edit(task, newTask, tasks)
+    if (error) return error
+
+    saveTasks(newTasks)
+    setTasks(newTasks)
+  }
+
   const deleteTask = task => {
-    task = task ?? getSelectedTask()
-
-    const newTasks = structuredClone(tasks).filter(({ name }) => name !== task)
+    const newTasks = remove(task, tasks)
+    saveTasks(newTasks)
     setTasks(newTasks)
   }
-  const editTask = (newTask, task) => {
-    const isNotValid = isNotValidTask(newTask, tasks)
-    if (isNotValid) return isNotValid
 
-    task = task ?? getSelectedTask()
-    const newTasks = structuredClone(tasks)
-    const index = newTasks.findIndex(({ name }) => name === task)
-    newTasks[index].name = newTask
+  const refTasks = useRef(tasks)
+  useEffect(() => {
+    refTasks.current = tasks
+  }, [tasks])
 
+  const selectTask = task => {
+    setTasks(select(task, refTasks.current))
+  }
+  const checkTask = task => {
+    const newTasks = check(task, refTasks.current)
+    saveTasks(newTasks)
     setTasks(newTasks)
   }
-  const saveMarkFor = task => {
-    const newTasks = structuredClone(tasks)
-    const index = newTasks.findIndex(({ name }) => name === task)
-    newTasks[index].isMarked = !newTasks[index].isMarked
+  useEffect(() => {
+    const deselectAllTasks = task => {
+      const newTasks = structuredClone(refTasks.current)
+      newTasks.forEach(t => {
+        if (t.name !== task && t.state !== CHECKED) t.state = INITIAL
+        if (t.name === task && t.state !== CHECKED) t.state = SELECTED
+      })
+  
+      setTasks(newTasks)
+    }
+    window.addEventListener('click', deselectAllTasks)
 
-    setTasks(newTasks)
+    return () => {
+      window.removeEventListener('click', deselectAllTasks)
+    }
+  }, [])
+
+  const numTasks = tasks.reduce((counter, { state }) => {
+    return state !== CHECKED ? counter + 1: counter
+  }, 0)
+  
+  return {
+    tasks,
+    numTasks,
+    addTask,
+    editTask,
+    deleteTask,
+    selectTask,
+    checkTask,
   }
-  useEffect(() => saveTasks(tasks), [tasks])
-
-  return { tasks, addTask, editTask, deleteTask, saveMarkFor, numMarkedTasks }
 }

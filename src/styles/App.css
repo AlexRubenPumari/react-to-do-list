@@ -4,27 +4,49 @@
   align-items: center;
 }
 
+.Modal__overlay, .CircleButton--outterTaskInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 :root {
-  --fs-xs: .88em;
-  --rounded-sm: .4em;
+  --fs-small: .8em;
+  --fs-normal: 1em;
+  --fs-long: 1.4em;
   --p-sm: .4em;
-  --p-m: .9em;
+  --p-m: .8em;
   --p-l: 1.2em;
   --aquamarine-50: hsl(151, 28%, 55%);
   --aquamarine-60: hsl(151, 28%, 63%);
   --yellow-50: hsl(53, 100%, 54%);
   --yellow-80: hsl(53, 100%, 88%);
-  --color-primary-01:hsl(0, 0%, 9%);
-  --color-primary-01-20:hsl(0, 0%, 9%, .25);
-  --color-primary-03:hsl(0, 0%, 30%);
-  --color-secondary-01:hsl(0, 0%, 98%);
-  --color-terciary-01: var(--aquamarine-60);
-  --color-terciary-02: var(--aquamarine-50);
-  --color-quaternary-01: var(--yellow-80);
-  --color-quaternary-02: var(--yellow-50);
+  --white-90: hsl(0, 0%, 98%);
+  --white-80: hsl(0, 0%, 89%);
+  --white-70: hsl(0, 0%, 70%);
+  --black-90: hsl(0, 0%, 8%);
+  --black-80: hsl(0, 0%, 20%);
+  --black-70: hsl(0, 0%, 36%);
   --font-primary: Verdana;
   --font-secondary: Helvetica, Arial, sans-serif;
-  --taskHeight: 2.2em;
+}
+
+:root[data-scheme=light] {
+  --color-primary-01: var(--black-90);
+  --color-primary-02: var(--black-80);
+  --color-primary-03: var(--black-70);
+  --color-secondary-01: var(--white-90);
+  --color-secondary-02: var(--white-80);
+  --color-secondary-03: var(--white-70);
+}
+
+:root[data-scheme=dark] {
+  --color-primary-01: var(--white-90);
+  --color-primary-02: var(--white-80);
+  --color-primary-03: var(--white-70);
+  --color-secondary-01: var(--black-90);
+  --color-secondary-02: var(--black-80);
+  --color-secondary-03: var(--black-70);
 }
 
 * {
@@ -58,7 +80,7 @@ html {
 }
 
 h1, h2, h3, h4, h5, h6, p, span, a, strong, blockquote, i, b, u, em {
-  font-size: 1em;
+  font-size: var(--fs-normal);
   font-weight: inherit;
   font-style: inherit;
   text-decoration: none;
@@ -87,8 +109,8 @@ form, input, textarea, select, button, label, fieldset {
 button {
   padding: var(--p-sm) var(--p-l);
   font-weight: bold;
-  border-radius: var(--rounded-sm);
-  transition: background-color 200ms;
+  border-radius: 0.4em;
+  transition: background-color 200ms, color 200ms;
   user-select: none;
   cursor: pointer;
 }
@@ -105,7 +127,9 @@ svg {
 }
 
 body {
-  min-height: 100vh;
+  height: 100dvh;
+  position: relative;
+  overflow: hidden;
   font-size: 100%;
   font-family: var(--font-primary);
   color: var(--color-primary-01);
@@ -116,44 +140,31 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.Button--ppal {
-  background-color: var(--color-terciary-01);
-}
-
-.CloseButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: calc(var(--p-sm) * 0.35) var(--p-sm);
-  font-weight: bolder;
-  font-size: 1.5rem;
-  transition: 200ms color;
-}
-
 .CircleButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  aspect-ratio: 1/1;
   border-radius: 50%;
-  padding: 0;
+  aspect-ratio: 1/1;
+  background-color: var(--aquamarine-60);
 }
 .CircleButton__icon {
-  width: 55%;
+  width: 1.1em;
 }
-.CircleButton__icon--taskOptions {
-  width: var(--p-m);
+.CircleButton--outterTaskInput {
+  width: 3em;
+  min-width: 3em;
+  padding: 0;
+  color: var(--black-90);
 }
-.CircleButton--addTask {
-  width: 4em;
-  position: fixed;
-  bottom: 1rem;
-  right: 0.8rem;
-  background-color: var(--color-terciary-01);
+.CircleButton--innerTaskInput {
+  padding: var(--p-sm);
+  position: absolute;
+  top: 50%;
+  left: 1em;
+  background-color: initial;
+  transform: translateY(-50%);
 }
-.CircleButton--taskOptions {
-  height: 100%;
-  background-color: var(--color-quaternary-01);
+.CircleButton--back {
+  padding: var(--p-m);
+  background-color: transparent;
 }
 
 .Modal {
@@ -162,16 +173,13 @@ body {
   align-items: flex-end;
   gap: 1em;
   background-color: var(--color-secondary-01);
-  border-radius: var(--rounded-sm);
+  border-radius: 0.4em;
   padding: 1.5em 1em;
 }
 .Modal__overlay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: absolute;
   inset: 0;
-  background-color: var(--color-primary-01-20);
+  background-color: red;
 }
 
 .Prompt__label {
@@ -195,43 +203,115 @@ body {
 }
 
 .Task {
-  position: relative;
-}
-.Task__content {
-  width: 20rem;
-  padding: var(--p-sm) 0 var(--p-sm) 1.5em;
+  padding: var(--p-sm) 1.5em;
   border-radius: 1em/50%;
-  background-color: var(--color-quaternary-01);
+  color: var(--black-90);
+  background-color: var(--yellow-80);
   transition: 200ms background-color;
   user-select: none;
   cursor: pointer;
 }
-.Task__content.selected {
-  background-color: var(--color-quaternary-02);
+.Task__wrapper {
+  width: 100%;
+  position: relative;
 }
-.Task__content.marked {
+.Task.selected {
+  background-color: var(--yellow-50);
+}
+.Task.checked {
+  color: var(--color-primary-01);
   text-decoration: line-through;
-  background-color: var(--color-primary-01-20) !important;
+  background-color: var(--color-secondary-02) !important;
   cursor: default;
 }
-.Task__menu {
-  display: flex;
-  gap: calc(var(--p-m) * 1.3);
-  height: 100%;
+.Task--editing {
   position: absolute;
-  bottom: 0;
-  left: calc(100% + var(--p-m) * 1);
-  cursor: default;
+  bottom: 5em;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.TaskForm {
+  display: flex;
+  gap: 0.5em;
+  width: 600px;
+  max-width: 100vw;
+  padding: 0 0.5em;
+  position: absolute;
+  bottom: 0.5em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.TaskInput {
+  padding-right: 1.5em;
+  background-color: var(--color-secondary-02);
+  border-radius: 1.5em/50%;
+}
+.TaskInput:focus {
+  outline: none;
+}
+.TaskInput--taskForm {
+  width: 100%;
+  height: 3em;
+}
+.TaskInput__wrapper {
+  flex-grow: 1;
+  position: relative;
+}
+.TaskInput__error {
+  position: absolute;
+  bottom: 105%;
+  left: 2em;
+  font-size: var(--fs-small);
+  color: red;
+}
+
+.Menu {
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  outline: 1px solid var(--color-secondary-03);
+  background: var(--color-secondary-01);
+  user-select: none;
+  z-index: 1;
+}
+.Menu__item {
+  padding: var(--p-sm) var(--p-m);
+  cursor: pointer;
+  transition: background-color 200ms;
+}
+
+.Overlay {
+  position: absolute;
+  background-color: hsla(0, 0%, 0%, 0.4);
+  inset: 0;
+  z-index: 10;
+}
+.Overlay__header {
+  display: flex;
+  align-items: center;
+  gap: 0.65em;
+  height: 3.5em;
+  padding: 0 0.5em;
+  background-color: var(--color-secondary-02);
 }
 
 .Title {
   font-size: 1.4rem;
   font-weight: bold;
   margin-bottom: 0.8em;
+  text-align: center;
+}
+.Title--flex {
+  margin-bottom: 0;
 }
 
 .TasksContainer {
   gap: 5px;
+  width: 100%;
 }
 
 .ContainerPpal {
@@ -239,9 +319,10 @@ body {
   grid-template-rows: min-content auto;
   justify-items: center;
   gap: 1rem;
-  position: relative;
-  height: 100dvh;
-  padding: 2rem 1rem;
+  padding: 2rem 0.5em;
+  width: 600px;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .error {
@@ -256,24 +337,20 @@ body {
 }
 
 @media (hover: hover) {
-  .Task__content:hover {
-    background-color: var(--color-quaternary-02);
+  .Task:hover {
+    background-color: var(--yellow-50);
   }
-  .Button--ppal:hover {
-    background-color: var(--color-terciary-02);
+  .CircleButton:hover {
+    background-color: var(--aquamarine-50);
   }
-  .Button--sec:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
+  .CircleButton--innerTaskInput:hover {
+    background-color: var(--color-secondary-03);
   }
-  .CircleButton--addTask:hover {
-    background-color: var(--color-terciary-02);
+  .CircleButton--back:hover {
+    background-color: var(--color-secondary-03);
   }
-  .CircleButton--taskOptions:hover {
-    background-color: var(--color-quaternary-02);
-  }
-  .CloseButton:hover {
-    color: var(--color-primary-03);
+  .Menu__item:hover {
+    background-color: var(--color-secondary-02);
   }
 }
 @media (hover: none) {
@@ -284,18 +361,6 @@ body {
   }
   * {
     -webkit-tap-highlight-color: transparent;
-  }
-}
-@media (max-width: 700px) {
-  .Task__menu {
-    background-color: var(--color-quaternary-01);
-    border-radius: 1em/50%;
-    padding: var(--p-sm) var(--p-l);
-    height: 3em;
-    position: fixed;
-    left: 50%;
-    bottom: 1.9rem;
-    transform: translateX(-50%);
   }
 }
 

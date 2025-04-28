@@ -1,0 +1,41 @@
+@use './config' as c;
+
+.TaskForm {
+  display: flex;
+  gap: .5em;
+
+  width: c.$ideal-width;
+  max-width: 100vw;
+  padding: 0 c.$lateral-padding;
+
+  position: absolute;
+  bottom: c.$lateral-padding;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.TaskInput {
+  padding-right: 1.5em;
+  
+  background-color: var(--color-secondary-02);
+  border-radius: calc(c.$chat-heigth / 2) / 50%;
+  &:focus {
+    outline: none;
+  }
+  &--taskForm {
+    width: 100%;
+    height: c.$chat-heigth;
+  }
+  &__wrapper {
+    flex-grow: 1;
+
+    position: relative;
+  }
+  &__error {
+    position: absolute;
+    bottom: 105%;
+    left: 2em;
+    
+    font-size: var(--fs-small);
+    color: red;
+  }
+}

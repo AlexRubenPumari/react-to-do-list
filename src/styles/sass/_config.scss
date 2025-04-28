@@ -1,5 +1,62 @@
-%FlexColumnContainer {
+$ideal-width: 600px;
+$lateral-padding: .5em;
+$rounded-sm: .4em;
+$chat-heigth: 3em;
+
+
+%column-flex-center {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+%flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+%container {
+  width: 100%;
+  max-width: $ideal-width;
+  padding: 0 .5em;
+}
+
+
+:root {
+  --fs-small: .8em;
+  --fs-normal: 1em;
+  --fs-long: 1.4em;
+
+  --p-sm: .4em;
+  --p-m: .8em;
+  --p-l: 1.2em;
+
+  --aquamarine-50: hsl(151, 28%, 55%);
+  --aquamarine-60: hsl(151, 28%, 63%);
+  --yellow-50: hsl(53, 100%, 54%);
+  --yellow-80: hsl(53, 100%, 88%);
+  --white-90: hsl(0, 0%, 98%);
+  --white-80: hsl(0, 0%, 89%);
+  --white-70: hsl(0, 0%, 70%);
+  --black-90: hsl(0, 0%, 8%);
+  --black-80: hsl(0, 0%, 20%);
+  --black-70: hsl(0, 0%, 36%);
+
+  --font-primary: Verdana;
+  --font-secondary: Helvetica, Arial, sans-serif;
+}
+:root[data-scheme="light"] {
+  --color-primary-01: var(--black-90);
+  --color-primary-02: var(--black-80);
+  --color-primary-03: var(--black-70);
+  --color-secondary-01: var(--white-90);
+  --color-secondary-02: var(--white-80);
+  --color-secondary-03: var(--white-70);
+}
+:root[data-scheme="dark"] {
+  --color-primary-01: var(--white-90);
+  --color-primary-02: var(--white-80);
+  --color-primary-03: var(--white-70);
+  --color-secondary-01: var(--black-90);
+  --color-secondary-02: var(--black-80);
+  --color-secondary-03: var(--black-70);
 }
