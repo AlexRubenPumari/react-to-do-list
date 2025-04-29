@@ -1,4 +1,4 @@
-import { SCHEME_TYPES as S } from '../config/constants'
+import { SCHEME_TYPES as S, SCHEME_TYPES } from '../config/constants'
 
 export function getDefaultScheme () {
   if (!window.matchMedia) return S.LIGHT

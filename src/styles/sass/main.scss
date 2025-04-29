@@ -1,39 +1,19 @@
-@use './config.scss' as c;
-@use './base.scss';
-@use './CircleButton.scss';
-@use './Modal.scss';
-@use './Prompt.scss';
-@use './Task.scss';
-@use './TaskInput.scss';
-@use './Menu.scss';
+@use './config' as c;
+@use './base';
+@use './CircleButton';
+@use './Modal';
+@use './Prompt';
+@use './Task';
+@use './TaskInput';
+@use './Menu';
 @use './Overlay';
-
+@use './containers';
 .Title {
   font: {
     size: 1.4rem;
     weight: bold;
   }
-  margin-bottom: 0.8em;
   text-align: center;
-  &--flex {
-    margin-bottom: 0;
-  }
-}
-.TasksContainer {
-  @extend %column-flex-center;
-  gap: 5px;
-  width: 100%;
-}
-.ContainerPpal {
-  display: grid;
-  grid-template-rows: min-content auto;
-  justify-items: center;
-  gap: 1rem;
-
-  padding: 2rem c.$lateral-padding;
-  width: c.$ideal-width;
-  max-width: 100%;
-  margin: 0 auto;
 }
 .error {
   color: red;

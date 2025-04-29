@@ -1,0 +1,75 @@
+@use './config' as c;
+
+.Container {
+  flex-grow: 1;
+  width: 100%;
+  position: relative;
+
+  overflow-y: hidden;
+  &::before,
+  &::after {
+    width: 100%;
+    height: c.$heigth-n;
+
+    position: absolute;
+    z-index: 2;
+    left: 0;
+
+    content: '';
+    pointer-events: none;
+  }
+  &::before {
+    top: 0;
+
+    background: linear-gradient(
+      to top,
+      transparent,
+      var(--color-secondary-01) 70%
+    );
+  }
+  &::after {
+    bottom: 0;
+
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--color-secondary-01) 70%
+    );
+  }
+}
+.TasksContainer {
+  $thumb-width: 6px;
+  $spacing-container: calc(c.$heigth-n * 1.8);
+  @extend %column-flex-center;
+  gap: 5px;
+  height: 100%;
+  padding: $spacing-container calc(c.$ideal-spacing - $thumb-width) $spacing-container c.$ideal-spacing;
+
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+  &::-webkit-scrollbar {
+    width: $thumb-width;
+  }
+  &::-webkit-scrollbar-track {
+    background: var(--color-secondary-01);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-primary-03);
+    border-left: 2px solid var(--color-secondary-01);
+    border-right: 2px solid var(--color-secondary-01);
+    border-top: $spacing-container solid var(--color-secondary-01);
+    border-bottom: $spacing-container solid var(--color-secondary-01);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-secondary-03);
+  }
+}
+.ContainerPpal {
+  $spacing: c.$chat-heigth + c.$ideal-spacing;
+  @extend %column-flex-center;
+
+  height: 100%;
+  padding-top: c.$heigth-n;
+  padding-bottom: $spacing;
+}

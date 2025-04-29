@@ -8,7 +8,7 @@ export default function Overlay({ title, children, onClose }) {
         {onClose && (
           <CircleButton mod='back' icon={<LeftArrowIcon />} onClick={onClose} />
         )}
-        {title && <span className='Title Title--flex'>{title}</span>}
+        {title && <span className='Title'>{title}</span>}
       </div>
       {children}
     </div>

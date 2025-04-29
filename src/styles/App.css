@@ -1,4 +1,4 @@
-.TasksContainer {
+.TasksContainer, .ContainerPpal {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,6 +140,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#app {
+  height: 100%;
+}
+
 .CircleButton {
   border-radius: 50%;
   aspect-ratio: 1/1;
@@ -213,6 +217,7 @@ body {
 }
 .Task__wrapper {
   width: 100%;
+  max-width: calc(600px - 1em);
   position: relative;
 }
 .Task.selected {
@@ -299,30 +304,65 @@ body {
   background-color: var(--color-secondary-02);
 }
 
-.Title {
-  font-size: 1.4rem;
-  font-weight: bold;
-  margin-bottom: 0.8em;
-  text-align: center;
+.Container {
+  flex-grow: 1;
+  width: 100%;
+  position: relative;
+  overflow-y: hidden;
 }
-.Title--flex {
-  margin-bottom: 0;
+.Container::before, .Container::after {
+  width: 100%;
+  height: 2.5em;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  content: "";
+  pointer-events: none;
+}
+.Container::before {
+  top: 0;
+  background: linear-gradient(to top, transparent, var(--color-secondary-01) 70%);
+}
+.Container::after {
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent, var(--color-secondary-01) 70%);
 }
 
 .TasksContainer {
   gap: 5px;
-  width: 100%;
+  height: 100%;
+  padding: 4.5em calc(0.5em - 6px) 4.5em 0.5em;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+}
+.TasksContainer::-webkit-scrollbar {
+  width: 6px;
+}
+.TasksContainer::-webkit-scrollbar-track {
+  background: var(--color-secondary-01);
+}
+.TasksContainer::-webkit-scrollbar-thumb {
+  background: var(--color-primary-03);
+  border-left: 2px solid var(--color-secondary-01);
+  border-right: 2px solid var(--color-secondary-01);
+  border-top: 4.5em solid var(--color-secondary-01);
+  border-bottom: 4.5em solid var(--color-secondary-01);
+}
+.TasksContainer::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary-03);
 }
 
 .ContainerPpal {
-  display: grid;
-  grid-template-rows: min-content auto;
-  justify-items: center;
-  gap: 1rem;
-  padding: 2rem 0.5em;
-  width: 600px;
-  max-width: 100%;
-  margin: 0 auto;
+  height: 100%;
+  padding-top: 2.5em;
+  padding-bottom: 3.5em;
+}
+
+.Title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
 }
 
 .error {

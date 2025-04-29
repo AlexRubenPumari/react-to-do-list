@@ -23,12 +23,25 @@ export default function App() {
     document.addEventListener(
       'touchmove', e => e.preventDefault(), { passive: false }
     )
-  })
+  }, [])
+  useEffect(() => {
+    document.getElementById('TasksContainer').addEventListener(
+      'touchmove', e => {
+        if (e.currentTarget.scrollHeight > e.currentTarget.clientHeight) {
+          e.stopPropagation();
+        } else {
+          e.preventDefault()
+        }
+      }, { passive: false }
+    )
+  }, [])
   return (
     <main className='ContainerPpal'>
       <h1 className='Title'>{`Make the most of today! (${numTasks})`}</h1>
-      <div className='TasksContainer'>
-        <ListOfTasks />
+      <div className='Container'>
+        <div className='TasksContainer' id='TasksContainer'>
+          <ListOfTasks />
+        </div>
       </div>
       <AddTaskForm />
     </main>
