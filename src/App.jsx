@@ -1,11 +1,16 @@
 import { useContext, useEffect } from 'react'
 import { TasksContext } from './contexts/tasks.jsx'
+import { ModalContext } from './contexts/modal.jsx'
+import { MODAL_TYPES as M } from './config/constants.js'
 import ListOfTasks from './components/ListOfTasks.jsx'
 import AddTaskForm from './components/AddTaskForm.jsx'
+import TaskOverlay from './components/TaskOverlay.jsx'
 import './styles/App.css'
 
 export default function App() {
   const { numTasks } = useContext(TasksContext)
+  const { modal } = useContext(ModalContext)
+
   useEffect(() => {
     if (window.visualViewport) {
       window.visualViewport.addEventListener('resize', () => {
@@ -43,7 +48,8 @@ export default function App() {
           <ListOfTasks />
         </div>
       </div>
-      <AddTaskForm />
+      { modal.type === null && <AddTaskForm /> } 
+      { modal.type === M.EDIT && <TaskOverlay currentTask={modal.value} /> }
     </main>
   )
 }

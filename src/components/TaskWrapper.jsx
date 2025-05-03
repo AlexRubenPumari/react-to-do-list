@@ -1,16 +1,12 @@
 import { useCallback, useContext } from 'react'
 import { TasksContext } from '../contexts/tasks.jsx'
-import { ModalContext } from '../contexts/modal.jsx'
 import { TASK_STATES } from '../config/constants.js'
-import { MODAL_TYPES as T } from '../config/constants.js'
 import debounce from 'just-debounce-it'
 import Task from './Task.jsx'
 import TaskMenu from './TaskMenu.jsx'
-import TaskOverlay from './TaskOverlay.jsx'
 
 export default function TaskWrapper({ children, state }) {
-  const { tasks, selectTask, checkTask } = useContext(TasksContext)
-  const { modal } = useContext(ModalContext)
+  const { selectTask, checkTask } = useContext(TasksContext)
 
   const debouncedHandleClick = useCallback(
     debounce((type, e) => {
@@ -33,11 +29,10 @@ export default function TaskWrapper({ children, state }) {
             e => debouncedHandleClick('double', e)
           }
         >
-          {children}
+          { children }
         </Task>
-        {state === TASK_STATES.SELECTED && <TaskMenu />}
+        { state === TASK_STATES.SELECTED && <TaskMenu /> }
       </div>
-      {modal.type === T.EDIT && <TaskOverlay currentTask={modal.value} />}
     </>
   )
 }

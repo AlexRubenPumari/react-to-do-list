@@ -24,8 +24,11 @@
     cursor: default;
   }
   &--editing {
+    width: calc(c.$ideal-width - 2 * c.$ideal-spacing);
+    max-width: calc(100vw - 2 * c.$ideal-spacing);
+
     position: absolute;
-    bottom: 5em;
+    bottom: 6em;
     left: 50%;
     transform: translateX(-50%);
     pointer-events: none;

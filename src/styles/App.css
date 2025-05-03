@@ -230,8 +230,10 @@ body {
   cursor: default;
 }
 .Task--editing {
+  width: 600px;
+  max-width: calc(100vw - 1em);
   position: absolute;
-  bottom: 5em;
+  bottom: 6em;
   left: 50%;
   transform: translateX(-50%);
   pointer-events: none;
@@ -247,6 +249,7 @@ body {
   bottom: 0.5em;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 10;
 }
 
 .TaskInput {
@@ -299,7 +302,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.65em;
-  height: 3.5em;
+  height: 4em;
   padding: 0 0.5em;
   background-color: var(--color-secondary-02);
 }
@@ -363,17 +366,6 @@ body {
   font-size: 1.4rem;
   font-weight: bold;
   text-align: center;
-}
-
-.error {
-  color: red;
-  font-weight: bold;
-  font-size: var(--fs-xs);
-}
-.error--prompt {
-  position: absolute;
-  top: 100%;
-  left: 0;
 }
 
 @media (hover: hover) {

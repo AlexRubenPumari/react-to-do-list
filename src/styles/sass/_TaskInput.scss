@@ -12,6 +12,7 @@
   bottom: c.$ideal-spacing;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 10;
 }
 .TaskInput {
   padding-right: 1.5em;

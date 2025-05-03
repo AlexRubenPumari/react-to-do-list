@@ -8,25 +8,7 @@
 @use './Menu';
 @use './Overlay';
 @use './containers';
-.Title {
-  font: {
-    size: 1.4rem;
-    weight: bold;
-  }
-  text-align: center;
-}
-.error {
-  color: red;
-  font: {
-    weight: bold;
-    size: var(--fs-xs);
-  }
-  &--prompt {
-    position: absolute;
-    top: 100%;
-    left: 0;
-  }
-}
+@use './texts';
 
 @media (hover: hover) {
   .Task {
